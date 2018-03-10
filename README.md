@@ -4,7 +4,7 @@
 
     $ yarn
 
-### Start serve static browsersync
+### Start serve
 
     $ yarn start
 
@@ -12,7 +12,7 @@
 
     $ yarn build
 
-### Run the test harness
+### Run the test
 
     $ yarn test
 
