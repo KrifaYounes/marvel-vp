@@ -3,9 +3,6 @@ import { Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
 
 class Character extends PureComponent {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         const character = this.props.character;
@@ -18,12 +15,13 @@ class Character extends PureComponent {
 
         return (
             <Col className='character'>
-                <img src={imgSource}  alt='MARVEL'/>
-                <div>
-                    <Link to={'/' + character.id }>{character.name}</Link>
-                    <div className='urlInfos'>
-                        { urlInfos }
-                    </div>
+                <Link to={'/' + character.id } className='character-name'>
+                    <div><img src={imgSource}  alt='MARVEL'/></div>
+                    <div>{character.name}</div>
+                </Link>
+
+                <div className='urlInfos'>
+                    { urlInfos }
                 </div>
             </Col>
         );

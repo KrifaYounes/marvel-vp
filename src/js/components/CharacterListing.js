@@ -5,9 +5,6 @@ import { loadCharacters } from '../actions/characters-actions';
 import Character from './Character';
 
 class CharacterListing extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.loadCharacters();
@@ -32,8 +29,8 @@ class CharacterListing extends Component {
                 }
             </div>
         );
-    }}
-
+    }
+}
 
 function mapStateToProps(state) {
     const characters = state.charactersReducer.characters;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { createStore, applyMiddleware } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createHashHistory } from 'history';

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadCharacters } from '../actions/characters-actions';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 
 class CharacterDetails extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const characterId = this.props.match.url;
         this.props.loadCharacters(characterId);
@@ -15,52 +12,73 @@ class CharacterDetails extends Component {
 
     render() {
         const { characters, isLoading } = this.props;
+        const character = characters[0];
 
         if (isLoading) {
             return ( <div> Loading </div>);
+        } else if (!character) {
+            return ( <div> Heroe Not Found </div>);
+
         } else {
 
-            const character = characters[0];
-            const imgSource = character ? character.thumbnail.path + '.' + character.thumbnail.extension : '';
-            const description = character ? character.description : '';
-            const name = character ? character.name : '';
+            const imgSource = character.thumbnail.path + '.' + character.thumbnail.extension ;
+            const description = character.description;
+            const name = character.name;
 
-            const series = character ? character.series.items.map(serie => {
-                    return ( <li><a href={serie.resourceURI}>{serie.name}</a></li>)
-                })
+            const series = character.series.items.length > 0 ? character.series.items.map(serie => {
+                    return ( <li>{serie.name}</li> )
+                }) : <li>Not available</li>;
 
-                : 'No series';
-
-            const comics = character ? character.comics.items.map(serie => {
-                    return ( <li><a href={serie.resourceURI}>{serie.name}</a></li>)
-                })
-
-                : 'No comics';
-
+            const comics = character.comics.items.length > 0 ? character.comics.items.map(comic => {
+                    return ( <li>{comic.name}</li> )
+            }) : <li>Not available</li>;
 
             return (
                 <div>
-                    <div className='character'>
-                        <img src={imgSource}/>
-                    </div>
-                    <div>
-                        {name}
-                    </div>
-                    <div>
-                        {description}
-                    </div>
-                    <div>
-                        <h3> Series </h3>
-                        {series}
-                    </div>
-                    <div>
-                        <h3> Comics </h3>
-                        {comics}
-                    </div>
+                    <Grid>
+                        <Row>
+
+                            <Col>
+                                <div className='character'>
+                                    <img src={imgSource} alt="MARVEL"/>
+                                </div>
+                            </Col>
+
+                            <Col>
+                                <div className="character-description">
+                                    <div>
+                                        {name}
+                                    </div> <br/>
+                                    <div>
+                                        {description}
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+
+
+                        <Row>
+                            <Col>
+                                <div className="box-shadow">
+                                    <h3> Series </h3>
+                                    <ul>{series}</ul>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="box-shadow">
+                                    <h3> Comics </h3>
+                                    <ul> {comics} </ul>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Grid>
+
                 </div>
             );
         }
-    }}
+    }
+
+}
 
 
 function mapStateToProps(state) {
