@@ -67,7 +67,6 @@ class CharacterDetails extends Component {
 
 }
 
-
 const Column = ({title, items}) => (
     <Col xs={6}>
         <div className="box-shadow">
@@ -78,7 +77,7 @@ const Column = ({title, items}) => (
 );
 
 
-CharacterDetails.CharacterDetails = {
+CharacterDetails.propTypes = {
     characters: PropTypes.object,
     isLoading: PropTypes.bool
 };
