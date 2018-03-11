@@ -17,11 +17,9 @@ class App extends Component {
                 <Router history={history}>
 
                     <div className="App">
-
                         <Header />
                         <Route exact path='/' component={CharacterListing} />
                         <Route path='/:characterId' component={CharacterDetails} />
-
                     </div>
 
                 </Router>

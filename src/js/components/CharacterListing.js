@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, Row } from 'react-flexbox-grid';
 import { loadCharacters } from '../actions/characters-actions';
@@ -11,8 +12,8 @@ class CharacterListing extends Component {
     }
 
     render() {
-        const characters = this.props.characters.map( (character) => {
-                return ( <Character character={character} /> );
+        const characters = this.props.characters.map( (character, index) => {
+                return ( <Character key={index} character={character} /> );
             });
 
         return (
@@ -25,12 +26,16 @@ class CharacterListing extends Component {
                     </Grid>
 
                     : 'Loading Marvel Heroes'
-
                 }
             </div>
         );
     }
 }
+
+CharacterListing.propTypes = {
+    characters: PropTypes.array,
+    isLoading: PropTypes.bool
+};
 
 function mapStateToProps(state) {
     const characters = state.charactersReducer.characters;

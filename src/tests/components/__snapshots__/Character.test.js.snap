@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Character Component Snapshot 1`] = `
+<Col
+  className="character"
+>
+  <Link
+    className="character-name"
+    replace={false}
+    to="/undefined"
+  >
+    <div>
+      <img
+        alt="MARVEL"
+        src="http://marvel.com/image.jpeg"
+      />
+    </div>
+    <div />
+  </Link>
+  <div
+    className="urlInfos"
+  />
+</Col>
+`;

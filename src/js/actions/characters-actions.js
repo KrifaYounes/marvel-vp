@@ -12,7 +12,7 @@ import {
     HTTP_STATUS_OK
 } from '../constants/app-const';
 
-export function loadCharacters(characterId = '', offset = 0, limit = 20) {
+export function loadCharacters(characterId = '') {
 
     return dispatch => {
 
@@ -23,9 +23,7 @@ export function loadCharacters(characterId = '', offset = 0, limit = 20) {
         const params = {
             ts: TIMESTAMP,
             apikey: API_PUBLIC,
-            hash:  HASH,
-            offset: offset,
-            limit: limit,
+            hash:  HASH
         };
 
 

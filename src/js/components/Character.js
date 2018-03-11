@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'react-flexbox-grid';
 import { Link } from 'react-router-dom';
 
@@ -9,8 +10,8 @@ class Character extends PureComponent {
         const imgSource = character.thumbnail.path + '.' + character.thumbnail.extension;
         const urls = this.props.character.urls;
 
-        const urlInfos = urls.map( url => {
-            return (<a href={url.url}> {url.type} </a>)
+        const urlInfos = urls.map( (url, index) => {
+            return (<a key={index} href={url.url}> {url.type} </a>)
         });
 
         return (
@@ -27,5 +28,10 @@ class Character extends PureComponent {
         );
     }
 }
+
+
+Character.propTypes = {
+    character: PropTypes.object.isRequired
+};
 
 export default Character;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadCharacters } from '../actions/characters-actions';
 import { Grid, Row, Col } from 'react-flexbox-grid';
@@ -20,31 +21,28 @@ class CharacterDetails extends Component {
             return ( <div> Heroe Not Found </div>);
 
         } else {
+            const { name, description, thumbnail, series, comics} = character;
+            const imgSource = thumbnail.path + '.' + thumbnail.extension ;
 
-            const imgSource = character.thumbnail.path + '.' + character.thumbnail.extension ;
-            const description = character.description;
-            const name = character.name;
+            const serieItems = series.items.map( (serie, index) => {
+                    return ( <li key={index}>{serie.name}</li> )
+                });
 
-            const series = character.series.items.length > 0 ? character.series.items.map(serie => {
-                    return ( <li>{serie.name}</li> )
-                }) : <li>Not available</li>;
-
-            const comics = character.comics.items.length > 0 ? character.comics.items.map(comic => {
-                    return ( <li>{comic.name}</li> )
-            }) : <li>Not available</li>;
+            const comicItems = comics.items.map( (comic, index) => {
+                    return ( <li key={index}>{comic.name}</li> )
+            });
 
             return (
                 <div>
                     <Grid>
                         <Row>
-
                             <Col>
                                 <div className='character'>
                                     <img src={imgSource} alt="MARVEL"/>
                                 </div>
                             </Col>
 
-                            <Col>
+                            <Col xs={8}>
                                 <div className="character-description">
                                     <div>
                                         {name}
@@ -56,20 +54,9 @@ class CharacterDetails extends Component {
                             </Col>
                         </Row>
 
-
                         <Row>
-                            <Col>
-                                <div className="box-shadow">
-                                    <h3> Series </h3>
-                                    <ul>{series}</ul>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="box-shadow">
-                                    <h3> Comics </h3>
-                                    <ul> {comics} </ul>
-                                </div>
-                            </Col>
+                            <Column title ="Series" items={serieItems} />
+                            <Column title ="Comics" items={comicItems} />
                         </Row>
                     </Grid>
 
@@ -80,6 +67,21 @@ class CharacterDetails extends Component {
 
 }
 
+
+const Column = ({title, items}) => (
+    <Col xs={6}>
+        <div className="box-shadow">
+            <h3> {title} </h3>
+            <ul> {items.length > 0 ? items : 'Not available'} </ul>
+        </div>
+    </Col>
+);
+
+
+CharacterDetails.CharacterDetails = {
+    characters: PropTypes.object,
+    isLoading: PropTypes.bool
+};
 
 function mapStateToProps(state) {
     const characters = state.charactersReducer.characters;
