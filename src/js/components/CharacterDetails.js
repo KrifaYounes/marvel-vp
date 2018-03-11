@@ -78,7 +78,7 @@ const Column = ({title, items}) => (
 
 
 CharacterDetails.propTypes = {
-    characters: PropTypes.object,
+    characters: PropTypes.array,
     isLoading: PropTypes.bool
 };
 
