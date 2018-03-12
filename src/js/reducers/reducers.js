@@ -38,11 +38,9 @@ const charactersReducer = (state = initialState, action) => {
     }
 };
 
-
 const reducers = combineReducers({
-    charactersReducer: charactersReducer,
+    marvelState: charactersReducer,
     routing: routerReducer
 });
-
 
 export default reducers;

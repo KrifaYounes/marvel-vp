@@ -37,15 +37,15 @@ CharacterListing.propTypes = {
     isLoading: PropTypes.bool
 };
 
-function mapStateToProps(state) {
-    const characters = state.charactersReducer.characters;
-    const isLoading = state.charactersReducer.isLoading;
+const mapStateToProps = ({marvelState}) => {
+    const { characters, isLoading } = marvelState;
 
     return {
         characters,
         isLoading
     };
-}
+};
+
 
 export default connect(mapStateToProps, { loadCharacters } )(CharacterListing);
 
